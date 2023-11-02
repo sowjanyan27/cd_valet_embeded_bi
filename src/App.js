@@ -10,6 +10,9 @@ import ReportDetails from './ReportDetails';
 import ReportList from './ReportList';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './login';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
 //useState that allows you to add state to a functional component
   const [reports1, setReports] = useState([]);
@@ -18,6 +21,7 @@ const App = () => {
 //  used to return the  response of  elements depending on where it is used.
   return (
     <BrowserRouter>
+    <ToastContainer /> {/* Add this line to include the ToastContainer */}
       <Routes>
         <Route path="/" exact element={<Login />} />
         <Route path="/list" exact element={<ReportList />} /> 

@@ -201,7 +201,7 @@ const ReportDetails = (props) => {
           <div className="col-md-12">
             <div style={{textAlign:'end'}}>
 
-            <button className=" backtolist mt-5 mb-2" onClick={handleBackToList}>Back to List</button>
+            {/* <button className=" backtolist mt-5 mb-2" onClick={handleBackToList}>Back to List</button> */}
             </div>
 
           </div>

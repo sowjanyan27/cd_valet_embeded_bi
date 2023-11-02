@@ -13,8 +13,8 @@ import { PowerBIService } from './api/powerbiapi'; // importing the service
 const ReportList = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const username = queryParams.get('username');
-  console.log(username,'username')
+  const username = window.sessionStorage.getItem('username');
+//   sessionStorage.getItem(username);
   // useNavigate used to navigate to different component
   const navigate = useNavigate();
   const [responseConfig, setResponseConfig] = useState({
@@ -33,7 +33,7 @@ const ReportList = () => {
       try {
         const url = await PowerBIService.getAll(); // Assuming this function returns the URL
         const response=url
-        console.log(response,'response')
+        console.log(response,'response');
         setResponseConfig(response);
       } catch (error) {
         console.error(error);
@@ -61,8 +61,8 @@ return(
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className="nav-end">
                         <ul className="list-inline" style={{margin:"0px"}}>
-                            <li className="list-inline-item">
-                                <i className="fa fa-bell-o bell-icon" style={{position:'relative'}} aria-hidden="true"></i>
+                            <li className="list-inline-item"  style={{position:'relative'}}>
+                                <i className="fa fa-bell-o bell-icon" aria-hidden="true"></i>
                                 <span className="notification">2</span>
                             </li>
                             <li className="list-inline-item">
@@ -77,7 +77,7 @@ return(
                                                 <i className="fa fa-caret-up logout-up-icon"  aria-hidden="true"></i>
                                                 <div className="list-items-sign">
                                                     <ul  className="list-unstyled">
-                                                        <li><i className="fa fa-sign-out" aria-hidden="true"></i>
+                                                        <li className="cursor"><i className="fa fa-sign-out" aria-hidden="true"></i>
                                                         <a className="login-href" onClick={handleLogout}>
                                                             <span>Logout</span>
                                                         </a>
@@ -105,13 +105,13 @@ return(
             <div className="banner-sec">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-6 col-lg-6 col-sm-6">
                             <div className="banner-text ps-2">
                                 <h4> Hi {username},</h4>
                                 <h3>Welcome Back</h3>
                             </div>
                         </div>
-                        <div className="col-md-6 text-end">
+                        <div className="col-md-6 col-lg-6 col-sm-6 text-end">
                             <div className="img-john">
                                 <Image className="img-back" src="banner-img1.png"/>
                             </div>
@@ -123,22 +123,27 @@ return(
                 <div className="container-fluid">
                     <div className="row">
                     {responseConfig.reports.map((report, index) => (
-                        <div className="col-md-2 w-20">
+                        <div className="col-md-12 col-lg-2 col-sm-6 w-20">
                             <div>
-                                <div className="card">
-                                    <div className="header mb-2">
-                                        <span className="icon">
-                                            <Image className="" style={{width:"30px"}} src="Digital.png"/>
-                                        </span>
-                                    </div>
-                                    <Link key={index} to={`/report?reportId=${report.Id}&embedUrl=${report.EmbedUrl}&token=${responseConfig.token}&reportname=${report.Name}&username=${username}`}>
-                                    <a className="message" style={{width:'200px'}}>
-                                        {report.Name}
-                                    </a>
-                                    </Link>
-                                    {/* <span className="reports">5 Reports </span> */}
-                                    
-                                </div>
+                                {username === 'cdvaletuser' && (report.Name === 'Market and Consumer Analytics- Details' || report.Name === 'Usage Metrics Report') ? ('') : (
+                                     <div className="card">
+                                     <div className="header mb-2">
+                                         <span className="icon">
+                                             <Image className="" style={{width:"30px"}} src="Digital.png"/>
+                                         </span>
+                                     </div>
+                                     <Link key={index} to={`/report?reportId=${report.Id}&embedUrl=${report.EmbedUrl}&token=${responseConfig.token}&reportname=${report.Name}&username=${username}`}>
+                                         <a className="message" style={{width:'200px'}}>
+                                             {report.Name}
+                                         </a>
+                                         </Link>
+                                     
+                                     
+                                     {/* <span className="reports">5 Reports </span> */}
+                                     
+                                 </div>
+                                )}
+                               
                             </div>
                         </div>
                          ))}
