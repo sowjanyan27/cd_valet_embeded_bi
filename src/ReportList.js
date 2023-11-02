@@ -34,6 +34,11 @@ const ReportList = () => {
         const url = await PowerBIService.getAll(); // Assuming this function returns the URL
         const response=url
         console.log(response,'response');
+        if(Array.isArray(response.reports) && response.reports.length>2 && username==="cdvaletuser"){
+            response.reports= JSON.parse(JSON.stringify(response.reports.slice(0,2)));
+        }else{
+            response.reports = JSON.parse(JSON.stringify(response.reports));
+        }
         setResponseConfig(response);
       } catch (error) {
         console.error(error);
@@ -125,8 +130,10 @@ return(
                     {responseConfig.reports.map((report, index) => (
                         <div className="col-md-12 col-lg-2 col-sm-6 w-20">
                             <div>
-                                {username === 'cdvaletuser' && (report.Name === 'Market and Consumer Analytics- Details' || report.Name === 'Usage Metrics Report') ? ('') : (
-                                     <div className="card">
+                                {/* {username === 'cdvaletuser' && (report.Name === 'Market and Consumer Analytics- Details' || report.Name === 'Usage Metrics Report') ? ('') : (
+                                    
+                                )} */}
+                                 <div className="card">
                                      <div className="header mb-2">
                                          <span className="icon">
                                              <Image className="" style={{width:"30px"}} src="Digital.png"/>
@@ -142,7 +149,6 @@ return(
                                      {/* <span className="reports">5 Reports </span> */}
                                      
                                  </div>
-                                )}
                                
                             </div>
                         </div>
