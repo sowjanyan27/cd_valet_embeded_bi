@@ -277,12 +277,13 @@ return (
             <div className="bottom-cards">
               <div className="container-fluid">
                 <div className="row">
-                  {responseConfig.reports.map((report, index) => (
+                  
                     <div
-                      className="col-md-12 col-lg-2 col-sm-6 w-20"
-                      key={index}
+                      className="grid"
+                     
                     >
-                      <div className="card">
+                    {responseConfig.reports.map((report, index) => (
+                      <div className="card"  key={index}>
                         <div className="header mb-2">
                           <span className="icon">
                             <Image
@@ -300,8 +301,9 @@ return (
                           </a>
                         </Link>
                       </div>
+                    ))}
                     </div>
-                  ))}
+                  
                 </div>
               </div>
             </div>

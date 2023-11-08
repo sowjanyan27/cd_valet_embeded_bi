@@ -76,8 +76,9 @@ const ReportDetails = (props) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className="nav-end">
                         <ul className="list-inline" style={{margin:"0px"}}>
-                            <li className="list-inline-item">
-                                <i className="fa fa-bell-o bell-icon" style={{position:'relative'}} aria-hidden="true"></i>
+                           
+                            <li className="list-inline-item" style={{ position: "relative" }}>
+                                <i className="fa fa-bell-o bell-icon" aria-hidden="true"></i>
                                 <span className="notification">2</span>
                             </li>
                             <li className="list-inline-item">
@@ -123,7 +124,7 @@ const ReportDetails = (props) => {
                         <div className="col-md-10">
                             <div>
                                 <ul class="list-inline ul-zero pt-1">
-                                    <li class="list-inline-item ver-middle right-lined right-line"><i class="fa fa-arrow-left arrow-backs" aria-hidden="true" onClick={handleBackToList} ></i></li>
+                                    <li class="list-inline-item ver-middle right-lined right-line"><i class="fa fa-arrow-left arrow-backs cursor" aria-hidden="true" onClick={handleBackToList} ></i></li>
                                     <li class="list-inline-item ver-middle ps-2"> <p className="market-text">{name}</p></li>
                                 </ul>
                             </div>
