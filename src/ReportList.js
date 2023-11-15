@@ -224,7 +224,7 @@ return (
                     <li className="list-inline-item">
                       <div className="d-flex align-items-center">
                         <div className="flex-shrink-0">
-                          <div className="user-log">
+                          <div className="user-log relative">
                             <Image
                               className="user-img cursor"
                               src="images.jpeg"
@@ -266,7 +266,7 @@ return (
                       <h3>Welcome Back</h3>
                     </div>
                   </div>
-                  <div className="col-md-6 col-lg-6 col-sm-6 text-end">
+                  <div className="col-md-6 col-lg-6 col-sm-6 text-end center-img">
                     <div className="img-john">
                       <Image className="img-back" src="banner-img1.png" />
                     </div>

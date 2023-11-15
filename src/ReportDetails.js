@@ -69,7 +69,7 @@ const ReportDetails = (props) => {
     <div>
  <nav className="navbar navbar-expand-lg bg-light bottom-border">
             <div className="container-fluid">
-                <a className="navbar-brand ps-2" href="#"><Image className="" style={{width:"140px"}} src="Logo.png"/><span className="sub-span">Intelligence Tool</span></a>
+                <a className="navbar-brand ps-2" href="#"><Image className="" onClick={handleBackToList} style={{width:"140px"}} src="Logo.png"/><span className="sub-span">Intelligence Tool</span></a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
