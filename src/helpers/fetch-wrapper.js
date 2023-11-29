@@ -3,11 +3,15 @@
 /// Created By : 
 /// Purpose :   Handling the response in  different methods
 /// </summary>
-/// <returns></returns>
+/// <returns></returns>  
+import { PowerBIService } from "../api/powerbiapi";
 export const fetchWrapper = {
     get,
     post,
+    gettoken,
     put,
+    getpost,
+    postget,
     delete: _delete,
   
   };
@@ -63,4 +67,40 @@ export const fetchWrapper = {
     });
   }
 
-  
+
+  async function getpost(url) {
+    const requestOptions = {
+      method: "GET",
+      headers: { "authtoken" : localStorage.getItem('id_token') },
+      // body: JSON.stringify(body),
+    };
+    const response = await fetch(url, requestOptions);
+    return handleResponse(response);
+
+  }
+
+  async function gettoken() {
+    try {
+      const url = await PowerBIService.gettoken();
+      const response = url;
+      localStorage.setItem('list_token',response.token)
+      console.log(response, 'response');
+      return response.token;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function postget(url) {
+     const token = await gettoken()
+
+    const requestOptions = {
+      method: "GET",
+
+      headers: { "Authorization" : token},
+      // body: JSON.stringify(body),
+    };
+    const response = await fetch(url, requestOptions);
+    return handleResponse(response);
+
+  }

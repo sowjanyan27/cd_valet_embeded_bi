@@ -5,19 +5,45 @@
 /// Purpose : dashborad page once application has been run login page will be displayed 
 /// </summary>
 /// <returns></returns>
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Image } from "react-bootstrap";
 import './index.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { PowerBIService } from './api/powerbiapi'; 
 
 
 const Login = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ username: '', password: '' });
     const { username, password } = formData;
+    const [loading, setLoading] = useState(true);
+    const [responseConfig, setResponseConfig] = useState({ });
+    useEffect(() => {
+        async function fetchData() {
+          try {
+            // Assuming PowerBIService.postdata accepts headers as an argument
+            const headers = {
+              'authtoken': 'eyJhbGciOiJSUzI1NiIsImtpZCI6Ilg1ZVhrNHh5b2pORnVtMWtsMll0djhkbE5QNC1jNTdkTzZRR1RWQndhTmsiLCJ0eXAiOiJKV1QifQ.eyJ2ZXIiOiIxLjAiLCJpc3MiOiJodHRwczovL2FjY291bnQuY2R2YWxldC5jb20vMzdlZDgwMTYtZDcxNy00ZmE5LTlhZDctMWJhMWRiYzE3ZDU3L3YyLjAvIiwic3ViIjoiMTBjMzgyNWYtOTI5ZS00NDMyLTk3NWEtMzIyNmVkN2FhNTYzIiwiYXVkIjoiMGNjY2RiOWEtMzZmMy00ZDYxLWEwZWYtYWQ1MThiMzYyYWYzIiwiZXhwIjoxNzAwMjE2NDI5LCJub25jZSI6ImRlZmF1bHROb25jZSIsImlhdCI6MTcwMDIxNDYyOSwiYXV0aF90aW1lIjoxNzAwMjE0NjI5LCJuYW1lIjoiU293amFueWEgTiIsImVtYWlscyI6WyJzb3dqYW55YW5AbmV3bWVrc29sdXRpb25zLmNvbSJdLCJ0ZnAiOiJCMkNfMV9TaWduLWluIiwibmJmIjoxNzAwMjE0NjI5fQ.dAHw6tBbhRXmSlmcyyVYT6NW2fULUdz4JNWB4kDd2UfTLzjiE4a9_UDngq5otZ34l3Qil39R9TsMK3yCVwJl8GH9CArn7daH0QIrEuE90m49S0NcjSWnRyXoJOXTVtQHw2vsYyFD-KY1F_wNQlrI4ULd-B2Z51-mQan7y74aMKktCPU1inhZXzHHFqeiVpYsYDiLA5vptvQYGvvAKMB66C_0aT1nbs2cI2EvD3XR-hlc2eAcnACl-KcsHE2jhQJ7b6vKe6MZ0iibQHn6TiOKFwX-JJEhTVoNERQF15qxDfAU3MbIT-HmoTotqdXf0DlwyS1RVIjYZzo1vjQg4fViNg',
+            };
+      
+            const url = await PowerBIService.postdata(headers);
+            const response = url;
+            console.log(response, 'response');
+      
+            setResponseConfig(response);
+          } catch (error) {
+            console.error(error);
+          } finally {
+            setLoading(false);
+          }
+        }
+      
+        fetchData();
+      }, []);
+      
+    
     //click event for the login
     const handleLogin = () => {
         if (!username) {
